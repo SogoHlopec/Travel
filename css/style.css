@@ -64,6 +64,7 @@ body {
   background-size: 144rem 76.5rem;
   background-repeat: no-repeat;
   margin-top: -9rem;
+  overflow: hidden;
 }
 
 .div-header {
@@ -309,14 +310,15 @@ body {
   width: 144rem;
   display: flex;
   justify-content: center;
-  padding-left: 5.8rem;
   position: relative;
   left: 0;
   transition: all 1s ease;
+  padding-right: 22rem;
 }
 
 .slide {
-  position: relative;
+  position: absolute;
+  transition: all 1s ease;
 }
 
 .img-slide {
