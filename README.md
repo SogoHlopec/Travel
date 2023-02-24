@@ -1,19 +1,19 @@
 # Travel
 Landing page of a travel planning website. This project was created while studying at RS SHOOL https://rs.school/index.html Stage 0 2022q2
 
-##Task:
+## Task:
 * https://github.com/rolling-scopes-school/tasks/blob/master/tasks/travel/travel.md
 
-##Deploy:
+## Deploy:
 * https://sogohlopec.github.io/RSS_Travel/
 
-##Stack:
+## Stack:
 * HTML5
 * CSS3
 * JavaScript
 * Figma
 
-##Features:
+## Features:
 * Slider in "Popular Destinations" section;
 * Login pop up;
 * Adaptive layout.
