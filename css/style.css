@@ -372,11 +372,6 @@ body {
   background: #f2785c;
 }
 
-.button-slide:hover {
-  background: #f2785c;
-  transition: 0.2s;
-}
-
 .button-arrow {
   width: 22.8rem;
   height: 5.9rem;
@@ -1056,7 +1051,6 @@ body {
   .slide-wrapper-mobile {
     display: flex;
     position: relative;
-    left: 360px;
     transition: all 1s ease;
   }
 
@@ -1091,11 +1085,6 @@ body {
 
   .button-slide:nth-child(-n + 2) {
     margin-right: 0.6rem;
-  }
-
-  .button-slide:hover {
-    background: #f2785c;
-    transition: 0.2s;
   }
 
   .button-slide-activeMob {

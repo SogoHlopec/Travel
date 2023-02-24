@@ -32,6 +32,7 @@ const slider = document.querySelector(".slide-wrapper");
 const slides = Array.from(slider.querySelectorAll(".slide"));
 const WIDTH = slides[0].offsetWidth;
 slider.innerHTML = "";
+let isEvent = false;
 
 let step = 0;
 let offset = -0.5;
@@ -80,6 +81,7 @@ function moveRight() {
   }
   setTimeout(() => {
     slidesVisible[0].remove();
+    isEvent = false;
   }, 1000);
 }
 
@@ -93,104 +95,83 @@ function moveLeft() {
   }
   setTimeout(() => {
     slidesVisible[slidesVisible.length - 1].remove();
+    isEvent = false;
   }, 1000);
 }
 
 slider.addEventListener("click", (event) => {
-  const slides = Array.from(slider.querySelectorAll(".slide"));
-  const slideClick = event.target.parentElement;
-  if (event.target.classList.contains("img-spain")) {
-    document
-      .querySelector(".button-japan")
-      .classList.remove("button-slide-active");
-    document
-      .querySelector(".button-usa")
-      .classList.remove("button-slide-active");
-    document
-      .querySelector(".button-spain")
-      .classList.add("button-slide-active");
-  } else if (event.target.classList.contains("img-japan")) {
-    document
-      .querySelector(".button-japan")
-      .classList.add("button-slide-active");
-    document
-      .querySelector(".button-usa")
-      .classList.remove("button-slide-active");
-    document
-      .querySelector(".button-spain")
-      .classList.remove("button-slide-active");
-  } else if (event.target.classList.contains("img-usa")) {
-    document
-      .querySelector(".button-japan")
-      .classList.remove("button-slide-active");
-    document.querySelector(".button-usa").classList.add("button-slide-active");
-    document
-      .querySelector(".button-spain")
-      .classList.remove("button-slide-active");
-  }
-  const indexClick = slides.indexOf(slideClick);
-  const indexLeftSlide = 0;
-  const indexRightSlide = 2;
-  if (indexClick === indexRightSlide) {
-    drawRight();
-    setTimeout(() => {
-      moveRight();
-    }, 100);
-  } else if (indexClick === indexLeftSlide) {
-    drawLeft();
-    setTimeout(() => {
-      moveLeft();
-    }, 100);
+  if (isEvent === true) {
+    return false;
+  } else {
+    isEvent = true;
+    const slides = Array.from(slider.querySelectorAll(".slide"));
+    const slideClick = event.target.parentElement;
+    if (event.target.classList.contains("img-spain")) {
+      document
+        .querySelector(".button-japan")
+        .classList.remove("button-slide-active");
+      document
+        .querySelector(".button-usa")
+        .classList.remove("button-slide-active");
+      document
+        .querySelector(".button-spain")
+        .classList.add("button-slide-active");
+    } else if (event.target.classList.contains("img-japan")) {
+      document
+        .querySelector(".button-japan")
+        .classList.add("button-slide-active");
+      document
+        .querySelector(".button-usa")
+        .classList.remove("button-slide-active");
+      document
+        .querySelector(".button-spain")
+        .classList.remove("button-slide-active");
+    } else if (event.target.classList.contains("img-usa")) {
+      document
+        .querySelector(".button-japan")
+        .classList.remove("button-slide-active");
+      document
+        .querySelector(".button-usa")
+        .classList.add("button-slide-active");
+      document
+        .querySelector(".button-spain")
+        .classList.remove("button-slide-active");
+    }
+    const indexClick = slides.indexOf(slideClick);
+    const indexLeftSlide = 0;
+    const indexRightSlide = 2;
+    if (indexClick === indexRightSlide) {
+      drawRight();
+      setTimeout(() => {
+        moveRight();
+      }, 100);
+    } else if (indexClick === indexLeftSlide) {
+      drawLeft();
+      setTimeout(() => {
+        moveLeft();
+      }, 100);
+    }
   }
 });
 
-//! slider click button
+// //! slider buttons
 if (document.querySelector(".slide-wrapper").offsetWidth === 0) {
   document.querySelector(".button-spain").classList.add("button-slide-active");
 } else
   document.querySelector(".button-japan").classList.add("button-slide-active");
 
-const buttonSpain = document.querySelector(".button-spain");
-buttonSpain.addEventListener("click", () => {
-  slider.querySelector(".img-spain").click();
-
-  document
-    .querySelector(".button-japan")
-    .classList.remove("button-slide-active");
-  document.querySelector(".button-usa").classList.remove("button-slide-active");
-  document.querySelector(".button-spain").classList.add("button-slide-active");
-});
-
-const buttonJapan = document.querySelector(".button-japan");
-buttonJapan.addEventListener("click", () => {
-  slider.querySelector(".img-japan").click();
-
-  document
-    .querySelector(".button-spain")
-    .classList.remove("button-slide-active");
-  document.querySelector(".button-usa").classList.remove("button-slide-active");
-  document.querySelector(".button-japan").classList.add("button-slide-active");
-});
-
-const buttonUsa = document.querySelector(".button-usa");
-buttonUsa.addEventListener("click", () => {
-  slider.querySelector(".img-usa").click();
-
-  document
-    .querySelector(".button-spain")
-    .classList.remove("button-slide-active");
-  document
-    .querySelector(".button-japan")
-    .classList.remove("button-slide-active");
-  document.querySelector(".button-usa").classList.add("button-slide-active");
-});
-
 //! Mobile slider
-let offsetMobile = slideMob.offsetWidth;
 const slideWrapperMobile = document.querySelector(".slide-wrapper-mobile");
+const slidesMob = Array.from(slideWrapperMobile.querySelectorAll(".slide"));
+const WIDTH_MOBILE = slidesMob[0].offsetWidth;
+let offsetMobile = -0.5;
+slideWrapperMobile.innerHTML = "";
+let stepMobile;
+const arrowRight = document.querySelector(".arrow-right");
+const arrowLeft = document.querySelector(".arrow-left");
 
-function checkActiveButton(params) {
-  if (offsetMobile === slideMob.offsetWidth) {
+function checkActiveButton() {
+  if (slideWrapperMobile.querySelector(".spain")) {
     document
       .querySelector(".button-japan")
       .classList.remove("button-slide-active");
@@ -200,7 +181,7 @@ function checkActiveButton(params) {
     document
       .querySelector(".button-spain")
       .classList.add("button-slide-active");
-  } else if (offsetMobile === 0) {
+  } else if (slideWrapperMobile.querySelector(".japan")) {
     document
       .querySelector(".button-spain")
       .classList.remove("button-slide-active");
@@ -221,23 +202,95 @@ function checkActiveButton(params) {
   }
 }
 
-const arrowRight = document.querySelector(".arrow-right");
-arrowRight.addEventListener("click", () => {
-  offsetMobile += -slideMob.offsetWidth;
-  if (offsetMobile < -slideMob.offsetWidth) {
-    offsetMobile = slideMob.offsetWidth;
+function drawMobile() {
+  const slide = slidesMob[0].cloneNode(true);
+  slide.style.left = offsetMobile * WIDTH_MOBILE + "px";
+  slideWrapperMobile.append(slide);
+}
+drawMobile();
+
+function drawMobileRight() {
+  if (stepMobile === undefined) {
+    stepMobile = 1;
+  } else if (stepMobile + 1 === slidesMob.length) {
+    stepMobile = 0;
+  } else {
+    stepMobile++;
   }
-  slideWrapperMobile.style.left = offsetMobile + "px";
-  checkActiveButton();
+  offsetMobile = 0.5;
+  const slide = slidesMob[stepMobile].cloneNode(true);
+  slide.style.left = offsetMobile * WIDTH_MOBILE + "px";
+  slideWrapperMobile.append(slide);
+  isEvent = true;
+}
+
+function moveMobileRight() {
+  slider.onclick = null;
+  const slidesVisible = slideWrapperMobile.querySelectorAll(".slide");
+  let offset2 = -0.5;
+  for (let i = 0; i < slidesVisible.length; i++) {
+    slidesVisible[i].style.left = offset2 * WIDTH_MOBILE - WIDTH_MOBILE + "px";
+    offset2++;
+  }
+  setTimeout(() => {
+    slidesVisible[0].remove();
+    isEvent = false;
+    checkActiveButton();
+  }, 1000);
+}
+
+function drawMobileLeft() {
+  if (stepMobile === undefined) {
+    stepMobile = slidesMob.length - 1;
+  } else if (stepMobile - 1 < 0) {
+    stepMobile = slidesMob.length - 1;
+  } else if (stepMobile - 1 === 0) {
+    stepMobile = 0;
+  } else {
+    stepMobile--;
+  }
+  offsetMobile = -1.5;
+  const slide = slidesMob[stepMobile].cloneNode(true);
+  slide.style.left = offsetMobile * WIDTH_MOBILE + "px";
+  slideWrapperMobile.prepend(slide);
+  isEvent = true;
+}
+
+function moveMobileLeft() {
+  slider.onclick = null;
+  const slidesVisible = slideWrapperMobile.querySelectorAll(".slide");
+  let offset2 = 0.5;
+  for (let i = 0; i < slidesVisible.length; i++) {
+    slidesVisible[i].style.left = offset2 * WIDTH_MOBILE - WIDTH_MOBILE + "px";
+    offset2++;
+  }
+  setTimeout(() => {
+    slidesVisible[1].remove();
+    isEvent = false;
+    checkActiveButton();
+  }, 1000);
+}
+
+arrowRight.addEventListener("click", () => {
+  if (isEvent) {
+    return false;
+  } else {
+    drawMobileRight();
+    setTimeout(() => {
+      moveMobileRight();
+    }, 100);
+  }
 });
 
-const arrowLeft = document.querySelector(".arrow-left");
 arrowLeft.addEventListener("click", () => {
-  if (offsetMobile === slideMob.offsetWidth) {
-    offsetMobile = -slideMob.offsetWidth;
-  } else offsetMobile += slideMob.offsetWidth;
-  slideWrapperMobile.style.left = offsetMobile + "px";
-  checkActiveButton();
+  if (isEvent) {
+    return false;
+  } else {
+    drawMobileLeft();
+    setTimeout(() => {
+      moveMobileLeft();
+    }, 100);
+  }
 });
 
 // !POPUP
