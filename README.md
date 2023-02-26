@@ -17,3 +17,4 @@ Landing page of a travel planning website. This project was created while studyi
 * Slider in "Popular Destinations" section;
 * Login pop up;
 * Adaptive layout.
+* Pixel Perfect
