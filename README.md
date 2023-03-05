@@ -5,7 +5,7 @@ Landing page of a travel planning website. This project was created while studyi
 * https://github.com/rolling-scopes-school/tasks/blob/master/tasks/travel/travel.md
 
 ## Deploy:
-* https://sogohlopec.github.io/RSS_Travel/
+* https://sogohlopec.github.io/Travel/
 
 ## Stack:
 * HTML5
