@@ -18,3 +18,6 @@ Landing page of a travel planning website. This project was created while studyi
 * Login pop up;
 * Adaptive layout.
 * Pixel Perfect
+
+![desktop](https://github.com/SogoHlopec/Travel/blob/main/desktop.jpg)
+![mobile](https://github.com/SogoHlopec/Travel/blob/main/mobile.jpg)
